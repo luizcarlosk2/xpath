@@ -38,6 +38,10 @@
         hr {
             border: 1px solid #ffe81f;
         }
+        .radio-group label, .checkbox-group label {
+            display: block;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -115,5 +119,80 @@
         <li>Mace Windu's lightsaber</li>
         <li>Obi-Wan Kenobi's lightsaber</li>
     </ul>
+
+    <hr/>
+
+    <h2>Choose Your Star Wars Faction</h2>
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="faction" value="jedi"> Jedi
+        </label>
+        <label>
+            <input type="radio" name="faction" value="sith"> Sith
+        </label>
+        <label>
+            <input type="radio" name="faction" value="mandalorian"> Mandalorian
+        </label>
+    </div>
+
+    <h3>Your Chosen Faction:</h3>
+    <p id="chosenFaction">None selected yet.</p>
+
+<hr/>
+
+
+
+    <h3>Force Powers</h3>
+    <div class="checkbox-group">
+        <label>
+            <input type="checkbox" name="force" value="telekinesis"> Telekinesis
+        </label>
+        <label>
+            <input type="checkbox" name="force" value="mind-trick"> Mind Trick
+        </label>
+        <label>
+            <input type="checkbox" name="force" value="force-push"> Force Push
+        </label>
+        <label>
+            <input type="checkbox" name="force" value="force-choke"> Force Choke
+        </label>
+        <label>
+            <input type="checkbox" name="force" value="force-lightning"> Force Lightning
+        </label>
+    </div>
+
+    <div class="buttons">
+        <button onclick="clearSelection()">Clear Selection</button>
+        <button onclick="resetPage()">Reset Page</button>
+    </div>
+
+    <script>
+        const radioGroup = document.querySelectorAll('input[name="faction"]');
+        const chosenFactionText = document.getElementById('chosenFaction');
+        const checkboxes = document.querySelectorAll('input[name="force"]');
+
+        radioGroup.forEach(radio => {
+            radio.addEventListener('change', () => {
+                chosenFactionText.textContent = `You have chosen: ${radio.value.charAt(0).toUpperCase() + radio.value.slice(1)}`;
+            });
+        });
+
+        function clearSelection() {
+            radioGroup.forEach(radio => {
+                radio.checked = false;
+            });
+            chosenFactionText.textContent = 'None selected yet.';
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+
+        function resetPage() {
+            clearSelection();
+        }
+    </script>
+
+
+
 </body>
 </html>
